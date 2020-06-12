@@ -3,8 +3,20 @@ class UserService {
         this.userModel = userModel
     }
 
-    signup() {
-        console.log(this.userModel, '===================')
+    async index() {
+        return await this.userModel.findAll();
+    }
+
+    async show(id) {
+        return await this.userModel.findOne({
+            where: {
+                id
+            }
+        })
+    }
+
+    async create(body) {
+        return await this.userModel.create(body)
     }
 }
 

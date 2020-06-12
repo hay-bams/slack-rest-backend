@@ -3,10 +3,11 @@ export default (sequelize, DataTypes) => {
       "channel",
       {
         name: DataTypes.STRING,
-        public: DataTypes.BOOLEAN,
-      },
-      { underscored: true }
-    );
+        public: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
+        },
+      });
   
     Channel.associate = (models) => {
       // 1:M
