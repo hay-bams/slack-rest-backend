@@ -1,28 +1,32 @@
-import mongoose from 'mongoose';
 
-const userSchema = new mongoose.Schema(
-    {
-        firstname: {
-            type: String, 
-            required: true
-        },
-        lastname: {
-            type: String, 
-            required: true
-        },
-        username: {
-            type: String, 
-            required: true,
-            unique: true
-        },
-        password: {
-            type: String,
-            required: true
-        }
-    
-    }
-)
-
-const User = mongoose.model('User', userSchema)
-
-export default User
+export default (sequelize, DataTypes) => {
+    const User = sequelize.define('user', {
+      username: {
+        type: DataTypes.STRING,
+        unique: true,
+      },
+      email: {
+        type: DataTypes.STRING,
+        unique: true,
+      },
+      password: DataTypes.STRING,
+    }, { underscored: true });
+  
+    User.associate = (models) => {
+        // N:M relationship
+      User.belongsToMany(models.Team, {
+        through: 'member',
+        foreignKey: 'userId',
+      });
+      // N:M relationship
+      User.belongsToMany(models.Channel, {
+          through: 'channel_member',
+          foreignKey: {
+              name: 'userId',
+              field: 'user_id'
+          }
+      })
+    };
+  
+    return User;
+  };

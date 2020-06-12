@@ -1,12 +1,24 @@
-import mongoose from 'mongoose';
-import User from './user'; 
+import Sequelize from 'sequelize';
 
-export const connectDb = () => {
-    console.log(process.env.DATABASE_URL, '++++++')
-    return mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true })
-}
+const sequelize = new Sequelize('slack_rest', 'postgres', 'postgres', {
+  dialect: 'postgres',
+  underscored: true
+});
 
-export default {
-    User
-}
+const models = {
+  User: sequelize.import('./user'),
+  Channel: sequelize.import('./channel'),
+  Message: sequelize.import('./message'),
+  Team: sequelize.import('./team'),
+};
 
+Object.keys(models).forEach((modelName) => {
+  if ('associate' in models[modelName]) {
+    models[modelName].associate(models);
+  }
+});
+
+models.sequelize = sequelize;
+models.Sequelize = Sequelize;
+
+export default models;
