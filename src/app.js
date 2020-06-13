@@ -1,10 +1,10 @@
 import express from 'express'
 import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
+import cors from 'cors';
 import Models from './models';
 import Controllers from './controllers';
 import Services from './services'; 
-import models from './models';
 
 
 const Container = require("typedi").Container;
@@ -26,6 +26,7 @@ const registerDependency =  () => {
 }
 
 const registerMiddleware = () => {
+    app.use(cors())
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(bodyParser.json());
   
@@ -43,7 +44,7 @@ app.get('/', function(req, res) {
     return res.send('Slack API')
 })
 
-models.sequelize.sync({}).then(() => {
+Models.sequelize.sync({}).then(() => {
     app.listen(PORT, function() {
         console.log(`server is listening on port ${PORT}`)
     })

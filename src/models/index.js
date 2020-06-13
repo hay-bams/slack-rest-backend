@@ -3,8 +3,8 @@ import Sequelize from 'sequelize';
 const sequelize = new Sequelize('slack_rest', 'postgres', 'postgres', {
   dialect: 'postgres',
   define: {
-    underscored: true
-  }
+    underscored: true,
+  },
 });
 
 const models = {

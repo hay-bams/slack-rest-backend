@@ -1,11 +1,11 @@
 class MessageService {
-    constructor(messageModel) {
-        this.messageModel = messageModel
-    }
+  constructor(messageModel) {
+    this.messageModel = messageModel;
+  }
 
-    async create(body) {
-        return await this.messageModel.create(body)
-    }
+  async create(body) {
+    return await this.messageModel.create(body);
+  }
 }
 
 export default MessageService;
