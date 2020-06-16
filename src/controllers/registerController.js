@@ -6,6 +6,7 @@ class RegisterController {
 
   async create(req, res) {
     const user = await this.register.create(req.body);
+    if (!user.ok) return res.status(400).json(user);
     return res.status(201).json(user);
   }
 }

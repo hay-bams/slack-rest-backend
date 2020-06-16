@@ -1,6 +1,7 @@
 class ChannelService {
-  constructor(channelModel) {
-    this.channelModel = channelModel;
+  constructor(Models) {
+    this.models = Models;
+    this.channelModel = Models.Channel;
   }
 
   async create(body) {

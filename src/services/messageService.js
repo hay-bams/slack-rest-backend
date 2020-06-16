@@ -1,6 +1,7 @@
 class MessageService {
-  constructor(messageModel) {
-    this.messageModel = messageModel;
+  constructor(Models) {
+    this.models = Models;
+    this.messageModel = Models.Message;
   }
 
   async create(body) {

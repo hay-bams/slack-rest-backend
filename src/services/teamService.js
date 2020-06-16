@@ -1,6 +1,7 @@
 class TeamService {
-  constructor(teamModel) {
-    this.teamModel = teamModel;
+  constructor(Models) {
+    this.models = Models;
+    this.teamModel = Models.Team;
   }
 
   async create(body) {

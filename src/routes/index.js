@@ -5,7 +5,7 @@ const { Container } = require('typedi');
 const router = express.Router();
 
 // Register
-router.post('/register', Container.get('userController').create);
+router.post('/register', Container.get('registerController').create);
 
 // User
 router.get('/users', Container.get('userController').index);
