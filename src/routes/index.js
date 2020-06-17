@@ -7,6 +7,9 @@ const router = express.Router();
 // Register
 router.post('/register', Container.get('registerController').create);
 
+// Login
+router.post('/login', Container.get('loginController').index);
+
 // User
 router.get('/users', Container.get('userController').index);
 router.get('/users/:id', Container.get('userController').show);

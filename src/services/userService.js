@@ -1,8 +1,6 @@
 class UserService {
-  constructor(Models, ValidationError) {
-    this.models = Models;
-    this.userModel = Models.User;
-    this.validationError = ValidationError;
+  constructor(userModel) {
+    this.userModel = userModel;
   }
 
   async index() {

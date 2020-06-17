@@ -19,11 +19,13 @@ const registerDependency = () => {
   Container.set('channelService', new Services.ChannelService(Models.Channel));
   Container.set('messageService', new Services.MessageService(Models.Message));
   Container.set('registerService', new Services.RegisterService(Models.User));
+  Container.set('loginService', new Services.LoginService(Models.User));
   Container.set('userController', new Controllers.UserController(Container));
   Container.set('teamController', new Controllers.TeamController(Container));
   Container.set('channelController', new Controllers.ChannelController(Container));
   Container.set('messageController', new Controllers.MessageController(Container));
   Container.set('registerController', new Controllers.RegisterController(Container));
+  Container.set('loginController', new Controllers.LoginController(Container));
 };
 
 const registerMiddleware = () => {
