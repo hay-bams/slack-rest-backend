@@ -5,7 +5,7 @@ class TeamController {
   }
 
   async create(req, res) {
-    const team = await this.team.create({ ...req.body, owner: 1 });
+    const team = await this.team.create({ ...req.body, owner: req.user.id });
     return res.status(201).json(team);
   }
 }

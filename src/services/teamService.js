@@ -1,11 +1,25 @@
+import { formatErrors } from '../helpers/formatErrors';
+
 class TeamService {
-  constructor(Models) {
-    this.models = Models;
-    this.teamModel = Models.Team;
+  constructor(teamModel) {
+    this.teamModel = teamModel;
+    this.formatErrors = formatErrors;
   }
 
   async create(body) {
-    return await this.teamModel.create(body);
+    try {
+      await this.teamModel.create(body);
+      return {
+        ok: true,
+      };
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.log(err);
+      return {
+        ok: false,
+        errors: this.formatErrors(err),
+      };
+    }
   }
 }
 

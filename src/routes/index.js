@@ -15,7 +15,11 @@ router.get('/users', Container.get('userController').index);
 router.get('/users/:id', Container.get('userController').show);
 
 // Team
-router.post('/teams', Container.get('teamController').create);
+router.post(
+  '/teams',
+  Container.get('middleware').addUser,
+  Container.get('teamController').create,
+);
 
 // Channel
 router.post('/channels', Container.get('channelController').create);

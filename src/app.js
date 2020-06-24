@@ -5,6 +5,7 @@ import cors from 'cors';
 import Models from './models';
 import Controllers from './controllers';
 import Services from './services';
+import Middleware from './Middleware/index'
 
 const { Container } = require('typedi');
 
@@ -26,6 +27,7 @@ const registerDependency = () => {
   Container.set('messageController', new Controllers.MessageController(Container));
   Container.set('registerController', new Controllers.RegisterController(Container));
   Container.set('loginController', new Controllers.LoginController(Container));
+  Container.set('middleware', Middleware());
 };
 
 const registerMiddleware = () => {
@@ -33,7 +35,7 @@ const registerMiddleware = () => {
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
 
-  const router = require('./Routes/Index').default;
+  const router = require('./routes/index').default;
   app.use(router);
 };
 
