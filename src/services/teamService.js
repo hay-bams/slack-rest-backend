@@ -6,9 +6,9 @@ class TeamService {
     this.formatErrors = formatErrors;
   }
 
-  async create(body) {
+  async create(body, user) {
     try {
-      await this.teamModel.create(body);
+      await this.teamModel.create({ ...body, owner: user.id });
       return {
         ok: true,
       };
