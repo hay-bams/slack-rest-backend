@@ -21,8 +21,15 @@ router.post(
   Container.get('teamController').create,
 );
 
+router.get('/teams',
+  Container.get('middleware').addUser,
+  Container.get('teamController').index);
+
 // Channel
 router.post('/channels', Container.get('channelController').create);
+router.get('/channels/:teamId',
+  Container.get('middleware').addUser,
+  Container.get('channelController').findTeamChannels);
 
 // Message
 router.post('/messages', Container.get('messageController').create);

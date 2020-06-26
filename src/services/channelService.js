@@ -1,7 +1,18 @@
 class ChannelService {
-  constructor(Models) {
-    this.models = Models;
-    this.channelModel = Models.Channel;
+  constructor(ChannelModel) {
+    this.channelModel = ChannelModel;
+    this.create = this.create.bind(this);
+    this.findTeamChannels = this.findTeamChannels.bind(this);
+  }
+
+  async findTeamChannels(teamId) {
+    const channels = await this.channelModel.findAll({
+      where: {
+        teamId,
+      },
+    });
+
+    return channels;
   }
 
   async create(body) {

@@ -4,6 +4,18 @@ class TeamService {
   constructor(teamModel) {
     this.teamModel = teamModel;
     this.formatErrors = formatErrors;
+    this.index = this.index.bind(this);
+  }
+
+  async index(user) {
+    const teams = await this.teamModel.findAll({
+      where: {
+        owner: user.id,
+      }
+
+    }, { raw: true });
+
+    return teams;
   }
 
   async create(body, user) {
