@@ -16,7 +16,7 @@ const app = express();
 const registerDependency = () => {
   Container.set('Models', Models);
   Container.set('userService', new Services.UserService(Models.User));
-  Container.set('teamService', new Services.TeamService(Models.Team));
+  Container.set('teamService', new Services.TeamService(Models));
   Container.set('channelService', new Services.ChannelService(Models.Channel));
   Container.set('messageService', new Services.MessageService(Models.Message));
   Container.set('registerService', new Services.RegisterService(Models.User));

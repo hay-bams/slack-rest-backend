@@ -1,8 +1,10 @@
 import { formatErrors } from '../helpers/formatErrors';
+import { padEnd } from 'lodash';
 
 class TeamService {
-  constructor(teamModel) {
-    this.teamModel = teamModel;
+  constructor(Models) {
+    this.teamModel = Models.Team;
+    this.channelModel = Models.Channel;
     this.formatErrors = formatErrors;
     this.index = this.index.bind(this);
   }
@@ -11,7 +13,7 @@ class TeamService {
     const teams = await this.teamModel.findAll({
       where: {
         owner: user.id,
-      }
+      },
 
     }, { raw: true });
 
@@ -20,9 +22,11 @@ class TeamService {
 
   async create(body, user) {
     try {
-      await this.teamModel.create({ ...body, owner: user.id });
+      const team = await this.teamModel.create({ ...body, owner: user.id });
+      await this.channelModel.create({ name: 'general', public: true, teamId: team.id });
       return {
         ok: true,
+        team
       };
     } catch (err) {
       // eslint-disable-next-line no-console
